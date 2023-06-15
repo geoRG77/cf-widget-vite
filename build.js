@@ -7,7 +7,7 @@ import { fileURLToPath } from 'url'
 const __dirname = fileURLToPath(new URL('.', import.meta.url))
 const widgets = ['checkbox', 'dropdown', 'popover', 'radiogroup', 'select', 'slider', 'tabs', 'toolbar']
 
-const buildPromises = widgets.map((lib) => {
+const buildWidget = (lib) => {
   return build({
     configFile: false,
     build: {
@@ -16,7 +16,7 @@ const buildPromises = widgets.map((lib) => {
       lib: {
         entry: resolve(__dirname, `src/${lib}.jsx`),
         name: 'Widget',
-        fileName: (format) => `widgets/widget-${lib}.${format}.js`,
+        fileName: `widgets/widget-${lib}`,
         formats: ['iife'],
       },
       rollupOptions: {
@@ -42,6 +42,12 @@ const buildPromises = widgets.map((lib) => {
       'process.env.NODE_ENV': "'production'",
     },
   })
-})
+}
 
-Promise.all(buildPromises).then(() => console.log('All builds finished'))
+Promise.all(widgets.map(buildWidget))
+  .then(() => {
+    console.log('All builds finished!')
+  })
+  .catch((error) => {
+    console.error('Some builds failed:', error)
+  })
