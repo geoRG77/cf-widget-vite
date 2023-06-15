@@ -12,6 +12,7 @@ const buildPromises = widgets.map((lib) => {
     configFile: false,
     build: {
       outDir: './dist',
+      emptyOutDir: false,
       lib: {
         entry: resolve(__dirname, `src/${lib}.jsx`),
         name: 'Widget',
