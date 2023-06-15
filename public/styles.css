@@ -1,0 +1,36 @@
+body {
+  color: rgb(29, 28, 28);
+  margin: 0 auto;
+}
+
+nav {
+  font-size: 14px;
+  letter-spacing: -0.2px;
+  padding: 12px 24px;
+  margin-bottom: 48px;
+  background-color: #0073ff;
+  color: white;
+  display: flex;
+}
+
+nav .menu {
+  margin-left: 2rem;
+}
+
+nav .menu a {
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+nav .menu a.active {
+  color: rgba(0, 0, 75, 0.87);
+  background-color: white;
+}
+
+.container {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
