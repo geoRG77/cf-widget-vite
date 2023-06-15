@@ -7,15 +7,15 @@ import { fileURLToPath } from 'url'
 const __dirname = fileURLToPath(new URL('.', import.meta.url))
 const widgets = ['checkbox', 'dropdown', 'popover', 'radiogroup', 'select', 'slider', 'tabs', 'toolbar']
 
-widgets.forEach((lib) => {
-  build({
+const buildPromises = widgets.map((lib) => {
+  return build({
     configFile: false,
     build: {
       outDir: './dist',
       lib: {
         entry: resolve(__dirname, `src/${lib}.jsx`),
         name: 'Widget',
-        fileName: `widgets/widget-${lib}`,
+        fileName: (format) => `widgets/widget-${lib}.${format}.js`,
         formats: ['iife'],
       },
       rollupOptions: {
@@ -42,3 +42,5 @@ widgets.forEach((lib) => {
     },
   })
 })
+
+Promise.all(buildPromises).then(() => console.log('All builds finished'))
